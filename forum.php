@@ -6,7 +6,7 @@ if (isset($_POST['send']))
     // must create db and change connections
 	$mail = $_POST['message']; 
 	$avtor = $_SESSION['user_login'];
-	$conn = mysql_connect("localhost", "root", "") or die("Невозможно установить соединение: ".mysql_error());
+	$conn = mysql_connect("localhost", "root", "1656") or die("Database MySQL: access denied: ".mysql_error());
 	mysql_select_db("users");
 	$sql = "INSERT INTO mail(avtor, mail) VALUES('$avtor', '$mail')";
 	if (mysql_query($sql, $conn))
@@ -21,17 +21,17 @@ if($_SESSION['active'] == true)
 	<html> 
 	<head><meta http-equiv=\"content-type\" content=\"text/html; charset=utf-8\"><title>Форум</title></head> 
 	<body> 
-	<h3>Добро пожаловать на форум, ";
+	<h3>Welcome to chat, ";
 
 	echo $_SESSION['user_login'];
 	echo "!</h3> 
 	<p>Написать сообщение</p>
 	<form method=\"post\">
-	<textarea placeholder=\"Ваше сообщение...\" name=\"message\"></textarea><br>
+	<textarea placeholder=\"Your message...\" name=\"message\"></textarea><br>
 	<input type=\"submit\" name=\"send\" onclick=\"window.location.reload()\">
 	</form>
 	<br>
-	<h4>Сообщения на форуме</h4>";
+	<h4>Messages</h4>";
 
 	$conn = mysql_connect("localhost", "root", "");
 	mysql_select_db("users");

@@ -4,7 +4,7 @@ if (isset($_POST['send']))
 {
 
     // must create db and change connections
-	$conn = mysql_connect("localhost", "root", "") or die("Невозможно установить соединение: ".mysql_error());
+	$conn = mysql_connect("localhost", "root", "1656") or die("Database MySQL: access denied: ".mysql_error());
 	mysql_select_db("users");
 	$name = $_POST['nam']; 
 	$login = $_POST['login']; 
@@ -37,22 +37,22 @@ echo "<!DOCTYPE html>
 		if(login.length<3) key = false;
 		if(parseInt(pass)>5) key = false;
 
-		if(key == true) f.submit(); else alert(\"Заполните все поля!\");
+		if(key == true) f.submit(); else alert(\"Please, input all info!\");
 	};
 	</script>
 </head>
 <body>
 	<h3>Заполните данные для регистрации</h3>
 	<form method=\"post\" enctype=\"multipart/form-data\">
-		<input type='text' name='nam' placeholder='Ваше имя'><br>
-		<input type='text' name='login' placeholder='Предпочитаемый логин'><br>
-		<input type='password' name='pass' placeholder='Ваше пароль'><br>
+		<input type='text' name='nam' placeholder='Your name'><br>
+		<input type='text' name='login' placeholder='Your login'><br>
+		<input type='password' name='pass' placeholder='Your password'><br>
 		<input type='hidden' name='MAX_FILE_SIZE' value='30000'>
 		<input type='file' name='userfile'><br>
-		<span>Пол:</span>
+		<span>Sex:</span>
 		<select name='pol'>
-			<option>Мужчина</option>
-		 	<option>Женщина</option>
+			<option>Male</option>
+		 	<option>Famale</option>
 		</select><br>
 		<input type='submit' name='send'>
 	</form>

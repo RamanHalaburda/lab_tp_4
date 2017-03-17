@@ -6,7 +6,7 @@ if(isset($_POST['go']))
 {
 	session_start();
 	// must create db and change connections
-	$conn = mysql_connect("localhost", "root","");
+	$conn = mysql_connect("127.0.0.1", "root","1656");
 	mysql_select_db("users");
 	$sql = "SELECT login FROM user_info WHERE login='".$_POST['login']."' AND pass='".$_POST['pass']."';";
 	$result = mysql_query($sql, $conn);
@@ -18,22 +18,21 @@ if(isset($_POST['go']))
 	}
 	else
     {
-        //echo 'havent access to database';
-        //sleep(5);
+        error_log("DB: access denied!");
         Header("Location: index.php");
     }
 }
 
 echo "<!DOCTYPE html> 
 <html> 
-<head><meta http-equiv=\"content-type\" content=\"text/html; charset=utf-8\"><title>Главная страница</title></head> 
+<head><meta http-equiv=\"content-type\" content=\"text/html; charset=utf-8\"><title>Welcome to chat!</title></head> 
 <body> 
-<h3>Добро пожаловать!</h3> 
+<h3>Welcome, dear user!</h3> 
 <form method=\"post\">
-	Логин <input type=\"text\" name=\"login\"><br><br>
-	Пароль <input type=\"password\" name=\"pass\"><br><br>
-	<input type=\"submit\" name=\"go\" value=\"Войти\">
-	<input type=\"button\" value=\"Регистрация\" onclick=\"location.href = 'registr.php/';\">
+	LOGIN <input type=\"text\" name=\"login\"><br><br>
+	PASSWORD <input type=\"password\" name=\"pass\"><br><br>
+	<input type=\"submit\" name=\"go\" value=\"Log in\">
+	<input type=\"button\" value=\"Log on\" onclick=\"location.href = 'registr.php/';\">
 </form>
 </body></html>";
 ?>
