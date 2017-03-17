@@ -1,26 +1,29 @@
 <?php 
 header ("Content-Type: text/html; charset=utf-8"); 
-error_reporting(E_ALL); 
+error_reporting(E_ALL ^ E_DEPRECATED);
 	
 if(isset($_POST['go']))
 {
 	session_start();
 	// must create db and change connections
-	$conn = mysql_connect("127.0.0.1", "root","1656");
-	mysql_select_db("users");
+	error_log("start");
+    $conn = mysqli_connect("localhost", "root","1656","tp4");
+	//mysqli_select_db("tp4");
 	$sql = "SELECT login FROM user_info WHERE login='".$_POST['login']."' AND pass='".$_POST['pass']."';";
-	$result = mysql_query($sql, $conn);
+	$result = mysqli_query($conn, $sql); // vice versa
 	if (!mysql_num_rows($result) == 0)
 	{
+        error_log("DB: access denied!1");
 		$_SESSION['user_login'] = $_POST['login'];
 		$_SESSION['active'] = true;
 		Header("Location: forum.php");
 	}
 	else
     {
-        error_log("DB: access denied!");
+        error_log("DB: access denied!2");
         Header("Location: index.php");
     }
+    error_log("DB: access denied!3");
 }
 
 echo "<!DOCTYPE html> 
