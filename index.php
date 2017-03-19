@@ -29,6 +29,7 @@ echo "<!DOCTYPE html>
 <html> 
 <head><meta http-equiv=\"content-type\" content=\"text/html; charset=utf-8\"><title>Welcome to chat!</title></head> 
 <body> 
+<center>
 <h3>Welcome, dear user!</h3> 
 <form method=\"post\">
 	LOGIN <input type=\"text\" name=\"login\"><br><br>
@@ -36,5 +37,5 @@ echo "<!DOCTYPE html>
 	<input type=\"submit\" name=\"go\" value=\"Log in\">
 	<input type=\"button\" value=\"Log on\" onclick=\"location.href = 'registr.php/';\">
 </form>
-</body></html>";
+</center</body></html>";
 ?>

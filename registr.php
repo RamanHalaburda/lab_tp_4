@@ -2,10 +2,9 @@
 
 if (isset($_POST['send']))
 {
-
-    // must create db and change connections
     $conn = mysqli_connect("127.0.0.1:3306", "root","1656") or die("Database tp4 connection failed: " . mysqli_error());
     $db_selected = mysqli_select_db($conn,'tp4') or die("Database tp4 selection failed: " . mysqli_error());
+
 	$name = $_POST['nam']; 
 	$login = $_POST['login']; 
 	$pass = $_POST['pass']; 
@@ -42,7 +41,8 @@ echo "<!DOCTYPE html>
 	</script>
 </head>
 <body>
-	<h3>Заполните данные для регистрации</h3>
+    <center>
+	<h3>Please, fill info for registration</h3>
 	<form method=\"post\" enctype=\"multipart/form-data\">
 		<input type='text' name='nam' placeholder='Your name'><br>
 		<input type='text' name='login' placeholder='Your login'><br>
@@ -56,6 +56,7 @@ echo "<!DOCTYPE html>
 		</select><br>
 		<input type='submit' name='send'>
 	</form>
+	</center>
 </body>
 </html>";
 ?>
