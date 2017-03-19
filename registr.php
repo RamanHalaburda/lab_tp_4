@@ -4,8 +4,8 @@ if (isset($_POST['send']))
 {
 
     // must create db and change connections
-	$conn = mysql_connect("localhost", "root", "1656") or die("Database MySQL: access denied: ".mysql_error());
-	mysql_select_db("users");
+    $conn = mysqli_connect("127.0.0.1:3306", "root","1656") or die("Database tp4 connection failed: " . mysqli_error());
+    $db_selected = mysqli_select_db($conn,'tp4') or die("Database tp4 selection failed: " . mysqli_error());
 	$name = $_POST['nam']; 
 	$login = $_POST['login']; 
 	$pass = $_POST['pass']; 
@@ -14,7 +14,7 @@ if (isset($_POST['send']))
 	$avatar = $path.$_FILES['userfile']['name'];
 	$pol = $_POST['pol']; 
 	$sql = "INSERT INTO user_info(name, login, pass, avatar, pol) VALUES('$name', '$login', '$pass', '$avatar', '$pol')";
-	if (mysql_query($sql, $conn))
+	if (mysqli_query($conn, $sql))
 	{
 		Header("Location: index.php");
 	}

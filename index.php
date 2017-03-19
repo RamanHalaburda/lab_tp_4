@@ -5,24 +5,13 @@ error_reporting(E_ALL ^ E_DEPRECATED);
 if(isset($_POST['go']))
 {
 	session_start();
-	// must create db and change connections
 	error_log("start");
 
-    $conn = mysqli_connect("127.0.0.1:3306", "root","1656");
-    if (!$conn) {
-        die("Database tp4 connection failed: " . mysqli_error());
-    }
-
-    $db_selected = mysqli_select_db($conn,'tp4');
-    if (!$db_selected) {
-        die("Database tp4 selection failed: " . mysqli_error());
-    }
+    $conn = mysqli_connect("127.0.0.1:3306", "root","1656") or die("Database tp4 connection failed: " . mysqli_error());
+    $db_selected = mysqli_select_db($conn,'tp4') or die("Database tp4 selection failed: " . mysqli_error());
 
 	$sql = "SELECT login FROM user_info WHERE login='".$_POST['login']."' AND pass='".$_POST['pass']."';";
-	$result = mysqli_query($conn, $sql);
-    if (!$result) {
-        die ('Не удалось выполнить запрос "select login from tp4": ' . mysqli_error());
-    }
+	$result = mysqli_query($conn, $sql) or die ('Не удалось выполнить запрос "select login from tp4": ' . mysqli_error());
     if (!mysqli_num_rows($result) == 0)
 	{
 		$_SESSION['user_login'] = $_POST['login'];
