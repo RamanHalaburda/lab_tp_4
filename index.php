@@ -7,23 +7,33 @@ if(isset($_POST['go']))
 	session_start();
 	// must create db and change connections
 	error_log("start");
-    $conn = mysqli_connect("localhost", "root","1656","tp4");
-	//mysqli_select_db("tp4");
+
+    $conn = mysqli_connect("127.0.0.1:3306", "root","1656");
+    if (!$conn) {
+        die("Database tp4 connection failed: " . mysqli_error());
+    }
+
+    $db_selected = mysqli_select_db($conn,'tp4');
+    if (!$db_selected) {
+        die("Database tp4 selection failed: " . mysqli_error());
+    }
+
 	$sql = "SELECT login FROM user_info WHERE login='".$_POST['login']."' AND pass='".$_POST['pass']."';";
-	$result = mysqli_query($conn, $sql); // vice versa
-	if (!mysql_num_rows($result) == 0)
+	$result = mysqli_query($conn, $sql);
+    if (!$result) {
+        die ('Не удалось выполнить запрос "select login from tp4": ' . mysqli_error());
+    }
+    if (!mysqli_num_rows($result) == 0)
 	{
-        error_log("DB: access denied!1");
 		$_SESSION['user_login'] = $_POST['login'];
 		$_SESSION['active'] = true;
 		Header("Location: forum.php");
 	}
 	else
     {
-        error_log("DB: access denied!2");
+        die("die in else");
         Header("Location: index.php");
     }
-    error_log("DB: access denied!3");
 }
 
 echo "<!DOCTYPE html> 
